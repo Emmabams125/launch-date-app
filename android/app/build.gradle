@@ -1,0 +1,47 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"  // Firebase Google Services plugin
+}
+
+android {
+    namespace = "com.example.launch_date_app"
+    compileSdk = flutter.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.launch_date_app"
+        minSdkVersion  23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+        multiDexEnabled = true  // Correct syntax for multiDexEnabled
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')  // Firebase BOM for version management
+    implementation 'com.google.firebase:firebase-analytics'  // Add other Firebase dependencies as needed
+}
+
+// Apply the Google Services plugin at the end of the file
+apply plugin: 'com.google.gms.google-services'
